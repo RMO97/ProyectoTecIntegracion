@@ -1,5 +1,7 @@
 package com.adopcion.FormularioAdopcion;
 
+//import java.util.ArrayList;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -92,7 +94,4 @@ public class Adopcion {
     public void setReporte(Reportes reporte) {
     }
 
-    public Reportes getReporte() {
-        return null;
-    }
 }

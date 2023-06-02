@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @SpringBootApplication
@@ -15,6 +16,8 @@ public class FormularioAdopcion {
     private ArrayList<Reporte> reportes = new ArrayList<>();
     private int lastId = 0;
 
+    @Autowired
+    private iAdopcion iAdopcion;
     public static void main(String[] args) {
         SpringApplication.run(FormularioAdopcion.class, args);
     }
@@ -23,13 +26,19 @@ public class FormularioAdopcion {
     public String hello() {
         return "Hola Rest";
     }
-
-    @RequestMapping(value = "/Adopcion", method = RequestMethod.GET)
-    public ArrayList<Adopcion> getAdopciones() {
-        return adopciones;
+    
+    @GetMapping("/Adopcion")
+    public List<Adopcion> buscarAdopciones() {
+        Iterable<Adopcion> adopciones = iAdopcion.findAll();
+        List<Adopcion> listaAdopciones = new ArrayList<>();
+        
+        for (Adopcion adopcion : adopciones) {
+            listaAdopciones.add(adopcion);
+        }
+        
+        return listaAdopciones;
     }
-    @Autowired
-    private iAdopcion iAdopcion;
+    
     @PostMapping("/Adopcion")
     public ResponseEntity<String> addAdopcion(@RequestBody Adopcion adopcion) {
         lastId++;
@@ -38,9 +47,9 @@ public class FormularioAdopcion {
         iAdopcion.save(adopcion);
         return ResponseEntity.ok("Adopcion añadido exitosamente.");
     }
-    
+     
 
-    @GetMapping("/reporte/{id}")
+   /*  @GetMapping("/reporte/{id}")
     public Reportes getReporte(@PathVariable("id") int id) {
         for (Adopcion adopcion : adopciones) {
             if (adopcion.getId() == id && adopcion.getReporte() != null) {
@@ -48,7 +57,7 @@ public class FormularioAdopcion {
             }
         }
         return null;
-    }
+    }*/
 
     @GetMapping("/reporte")
     public ArrayList<Reporte> getReportes() {
