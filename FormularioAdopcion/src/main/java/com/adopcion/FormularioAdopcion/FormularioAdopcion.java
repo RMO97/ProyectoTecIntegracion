@@ -1,6 +1,7 @@
 package com.adopcion.FormularioAdopcion;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +11,9 @@ import java.util.ArrayList;
 @RestController
 @SpringBootApplication
 public class FormularioAdopcion {
-    //@Autowired
-    //private iAdopcion IAdopcion;
-    @Autowired
-    private iReportes IReportes;
-    ArrayList<Adopcion> adopciones = new ArrayList<>();
-    ArrayList<Reporte> reportes = new ArrayList<>();
+    private ArrayList<Adopcion> adopciones = new ArrayList<>();
+    private ArrayList<Reporte> reportes = new ArrayList<>();
+    private int lastId = 0;
 
     public static void main(String[] args) {
         SpringApplication.run(FormularioAdopcion.class, args);
@@ -30,48 +28,36 @@ public class FormularioAdopcion {
     public ArrayList<Adopcion> getAdopciones() {
         return adopciones;
     }
-
-    @RequestMapping(value = "/Adopcion", method = RequestMethod.POST, consumes = {"application/json"})
+    @Autowired
+    private iAdopcion iAdopcion;
+    @PostMapping("/Adopcion")
     public ResponseEntity<String> addAdopcion(@RequestBody Adopcion adopcion) {
+        lastId++;
+        adopcion.setId(lastId);
         adopciones.add(adopcion);
+        iAdopcion.save(adopcion);
         return ResponseEntity.ok("Adopcion añadido exitosamente.");
     }
-
-    /*@RequestMapping(value = "/reporte/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<String> assignReporte(@PathVariable int id, @RequestBody Reportes reporte) {
-        for (Adopcion adopcion : adopciones) {
-            if (adopcion.getId().equals(id)) {
-                adopcion.setReporte(reporte);
-                return ResponseEntity.ok("Reporte creado exitosamente.");
-            }
-        }
-        return ResponseEntity.notFound().build();
-    }*/
+    
 
     @GetMapping("/reporte/{id}")
     public Reportes getReporte(@PathVariable("id") int id) {
-        System.out.println("Hola");
-        Reportes reportes = new Reportes();
-        reportes = IReportes.findById(id).get();
-        return reportes;
+        for (Adopcion adopcion : adopciones) {
+            if (adopcion.getId() == id && adopcion.getReporte() != null) {
+                return adopcion.getReporte();
+            }
         }
-    
+        return null;
+    }
+
     @GetMapping("/reporte")
-    public Reportes getReportes() {
-        Reportes reportes = new Reportes();
+    public ArrayList<Reporte> getReportes() {
         return reportes;
     }
 
-
-    @RequestMapping(value = "/reporte", method = RequestMethod.POST, consumes = {"application/json"})
-    public ResponseEntity<String> addReportes(@RequestBody Reportes reportes) {
-        Reportes.add(reportes);
+    @PostMapping("/reporte")
+    public ResponseEntity<String> addReporte(@RequestBody Reporte reporte) {
+        reportes.add(reporte);
         return ResponseEntity.ok("Reporte añadido exitosamente.");
     }
-        
-    }
-        
-
-
-    
-
+}

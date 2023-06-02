@@ -89,9 +89,6 @@ public class Adopcion {
         this.id = id;
     }
 
-    public static void add(Adopcion adopcion) {
-    }
-
     public void setReporte(Reportes reporte) {
     }
 
