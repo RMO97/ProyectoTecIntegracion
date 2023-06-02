@@ -1,0 +1,32 @@
+version: '3.3'
+services: 
+  lomitos1:
+    image: openjdk:17
+    networks:
+    - mired
+    volumes:
+    - ./app:/app
+    ports:
+    - 8080:8081
+    environment:
+      MYSQL_HOST: db
+    command:
+    - java
+    - -jar
+    - /app/Perreria-PerreriaSOAP.jar
+    depends_on:
+    - db
+    links:
+    - db
+    restart: always
+  db:
+    image: mariadb
+    networks:
+    - mired
+    environment:
+      MARIADB_ROOT_PASSWORD: 123
+    volumes:
+    - ./app:/docker-entrypoint-initdb.d
+    - ./app/datos:/var/lib/mysql
+networks:
+  mired:
