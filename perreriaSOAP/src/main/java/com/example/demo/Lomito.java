@@ -8,6 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+//Clase Lomito con la definicion de los atributos
+//de un perrito dentro del esquema
+
 @Entity
 public class Lomito {
     

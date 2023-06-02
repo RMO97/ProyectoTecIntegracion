@@ -22,10 +22,12 @@ import https.perreria_uv_mx.lomitos.RegistrarLomitoRequest;
 import https.perreria_uv_mx.lomitos.RegistrarLomitoResponse;
 
 
+//Declaracion de los Endpoints
 
 @Endpoint
 public class EndPoint {
 
+    //Interface de Lomito
     @Autowired
     private iLomito ILomito;
 
@@ -59,12 +61,16 @@ public class EndPoint {
 
     }
 
+    //Endpoint para mostrar todos los lomitos registrados
     @PayloadRoot(localPart = "MostrarLomitosRequest", namespace = "https://perreria.uv.mx/lomitos")
     @ResponsePayload
     public MostrarLomitosResponse Buscar(){
         MostrarLomitosResponse respuesta = new MostrarLomitosResponse();
+        //Guardamos todos  los lomitos en un iterable
         Iterable<Lomito> lista = ILomito.findAll();
 
+        //Iteramos los lomitos para conseguir sus atributos
+        //y agregarlos a la respuesta
         for(Lomito lomito : lista){
             MostrarLomitosResponse.Lomito l = new MostrarLomitosResponse.Lomito();
             l.setId(lomito.getId());

@@ -15,11 +15,16 @@ import org.springframework.xml.xsd.XsdSchema;
 @EnableWs
 @Configuration
 public class Configuracion extends WsConfigurerAdapter{
+
+    //Definicion de los frijolitos
+
+    //Definicion del esquema a utilizar
     @Bean
     public XsdSchema saludoSchema(){
         return new SimpleXsdSchema(new ClassPathResource("esquema.xsd"));
     }
     
+    //Ruta base para las peticiones
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
@@ -27,6 +32,8 @@ public class Configuracion extends WsConfigurerAdapter{
         return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
 
+
+    //Ubicacion del wsdl para los endpoints
     @Bean(name = "lomitos")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema saludosSchema) {
         DefaultWsdl11Definition wsdl = new DefaultWsdl11Definition();
