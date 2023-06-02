@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://perreria.uv.mx/lomitos" xmlns:tns="https://perreria.uv.mx/lomitos" elementFormDefault="qualified">
+  <xs:element name="RegistrarLomitoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nombre" type="xs:string" />
+        <xs:element name="edad" type="xs:int" />
+        <xs:element name="raza" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistrarLomitoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="respuesta" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarLomitoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarLomitoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nombre" type="xs:string" />
+        <xs:element name="edad" type="xs:int" />
+        <xs:element name="raza" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditLomitoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:int" />
+        <xs:element name="nombre" type="xs:string" />
+        <xs:element name="edad" type="xs:int" />
+        <xs:element name="raza" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditLomitoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="respuesta" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteLomitoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteLomitoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="respuesta" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MostrarLomitosRequest" />
+  <xs:element name="MostrarLomitosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="lomito">
+          <xs:complexType>
+            <xs:sequence>
+            <xs:element name="id" type="xs:int" />
+              <xs:element name="nombre" type="xs:string" />
+              <xs:element name="edad" type="xs:int" />
+              <xs:element name="raza" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
