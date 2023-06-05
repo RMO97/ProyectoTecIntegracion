@@ -70,3 +70,4 @@ public class FormularioAdopcion {
         return ResponseEntity.ok("Reporte añadido exitosamente.");
     }
 }
+/*Cambio */
