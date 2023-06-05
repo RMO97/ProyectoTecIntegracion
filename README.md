@@ -1,6 +1,7 @@
-Comandos para lanzar el proyecto en Docker
+# Productos
 
-mkdir app
+##  Comandos para ejecutar los servicios
+- mkdir app
 mv ProyectoTecIntegracion/script.sql app/
 mv ProyectoTecIntegracion/Perreria-PerreriaSOAP.jar app/
 mv ProyectoTecIntegracion/backend.jar app/
