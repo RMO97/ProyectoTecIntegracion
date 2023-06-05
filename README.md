@@ -8,4 +8,23 @@
 - mv ProyectoTecIntegracion/FormAdopcionJar/FormularioAdopcion-0.0.1-SNAPSHOT.jar app/
 - mv ProyectoTecIntegracion/crear.yaml .
 
-docker-compose -f crear.yaml up
+- docker-compose -f crear.yaml up
+
+# Consumo
+
+## SOAP
+- /ws/lomitos.wsdl
+
+## REST
+- /formulario.html
+- /adopcion
+- /seguimiento
+
+### Datos esperados para seguimiento
+-{        
+        "nombre": "nombre",
+        "direccion": "direccion",
+        "nombrePerro": "nombrePerro",
+        "estado": "estado",
+        "tadoptado": "tadoptado"
+    }
