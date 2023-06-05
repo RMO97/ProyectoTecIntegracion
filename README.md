@@ -17,7 +17,7 @@
 
 ## REST
 - /formulario.html
-- /adopcion
+- /Adopcion
 - /seguimiento
 
 ### Datos esperados para seguimiento
